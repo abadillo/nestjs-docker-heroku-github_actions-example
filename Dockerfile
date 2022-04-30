@@ -1,30 +1,26 @@
 FROM node:18.0.0-alpine3.14 as builder
 
-
 ENV NODE_ENV build
-
 
 WORKDIR /home/node
 
-
 COPY . /home/node
-
 
 RUN npm ci \
     && npm run build \
     && npm prune --production
 
 
+
 # ---
 
 
-FROM node:16.8-alpine3.11
-
+FROM node:18.0.0-alpine3.14
 
 ENV NODE_ENV production
 
-
 USER node
+
 WORKDIR /home/node
 
 
